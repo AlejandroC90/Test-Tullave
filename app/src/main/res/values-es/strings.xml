@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Test Tullave</string>
+    <string name="action_settings">Opciones</string>
+    <string name="iniciar_sesion">Iniciar Sesión</string>
+    <string name="title_activity_registro">Registro</string>
+    <string name="numero_documento">Número de Documento</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="registrarse">Registrarme</string>
+    <string name="nombres">Nombres</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="title_activity_tarjetas">Cards</string>
+    <string name="cedula_ciudadania">Cédula de Ciudadania</string>
+    <string name="cedula_extranjeria">Cédula de extranjería</string>
+    <string name="registro_civil">Registro Civil</string>
+    <string name="first_fragment_label">Primer fragmento</string>
+    <string name="second_fragment_label">Segundo fragmento</string>
+    <string name="next">Después</string>
+    <string name="previous">Antes</string>
+    <string name="please_wait">Por favor espere</string>
+    <string name="error_inicio_sesion">Error inicio de sesion</string>
+
+</resources>
