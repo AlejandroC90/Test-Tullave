@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="options">
-        <item>Option 1</item>
-        <item>Option 2</item>
-        <item>Option 3</item>
-        <!-- Add more options as needed -->
+    <array name="options_documentos">
+        <item>@string/cedula_ciudadania</item>
+        <item>@string/cedula_extranjeria</item>
+        <item>@string/registro_civil</item>
     </array>
 </resources>

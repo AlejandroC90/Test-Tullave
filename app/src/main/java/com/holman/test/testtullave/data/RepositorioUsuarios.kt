@@ -11,7 +11,7 @@ class RepositorioUsuarios {
     fun iniciarSesion(context: Context, documento: String, contrasena: String): Boolean{
         var bd = interfazDBParaUsuarios(context)
 
-        var listado = bd.buscarUsuario(documento)
+        var listado = bd.buscarUsuario(documento, contrasena)
 
         return !listado.isEmpty()
     }
@@ -32,6 +32,7 @@ class RepositorioUsuarios {
                 nombres = nombres,
                 apellidos = apellidos,
                 documento = numeroDocumento,
+                tipoDocumento = tipoDocumento,
                 contrasena = contrasena,
                 correo = correo,
                 direccion = direccion

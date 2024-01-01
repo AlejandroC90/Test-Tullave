@@ -3,10 +3,15 @@ package com.holman.test.testtullave
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import android.widget.EditText
+import androidx.core.content.ContentProviderCompat.requireContext
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.holman.test.testtullave.interfaces.InterfazInicioSesion
 import com.holman.test.testtullave.presenters.InicioSesionPresenter
 
@@ -16,8 +21,12 @@ class MainActivity : AppCompatActivity(), InterfazInicioSesion.Vista {
     lateinit var dialog: AlertDialog
     lateinit var botonInicioSesion: Button
     lateinit var botonRegistro: Button
-    lateinit var numeroDocumento: EditText
-    lateinit var contrasena: EditText
+    lateinit var numeroDocumento: TextInputEditText
+    lateinit var numeroDocumentoLayout: TextInputLayout
+    lateinit var contrasena: TextInputEditText
+    lateinit var contrasenaLayout: TextInputLayout
+
+    lateinit var spinner: TextInputLayout
 
 
 
@@ -35,11 +44,14 @@ class MainActivity : AppCompatActivity(), InterfazInicioSesion.Vista {
     fun inicializar() {
 
         numeroDocumento = findViewById(R.id.editNumeroDocumento)
+        contrasena = findViewById(R.id.editContrasena)
 
 
         botonInicioSesion = findViewById(R.id.botonInicioSesion)
         botonInicioSesion.setOnClickListener {
-            presentador?.iniciarSesion(this,numeroDocumento.text.toString(),"b")
+            if(validarFormulario()){
+                presentador?.iniciarSesion(this,numeroDocumento.text.toString(),contrasena.text.toString())
+            }
         }
 
         botonRegistro = findViewById(R.id.botonRegistro)
@@ -53,8 +65,31 @@ class MainActivity : AppCompatActivity(), InterfazInicioSesion.Vista {
         builder.setView(R.layout.dialog_cargando)
         dialog = builder.create()
 
+        spinner = findViewById(R.id.spinnerTipoDocumento)
+
+        val documentos = resources.getStringArray(R.array.options_documentos)
+        val adapter = ArrayAdapter(this, R.layout.list_item, documentos)
+        (spinner.editText as? AutoCompleteTextView)?.setAdapter(adapter)
 
 
+        contrasenaLayout = findViewById(R.id.layouteditcontrasena)
+        numeroDocumentoLayout = findViewById(R.id.layouteditnumerodocumento)
+    }
+
+    fun validarFormulario(): Boolean{
+        if(contrasenaLayout.editText?.text.toString().isEmpty()){
+            contrasenaLayout.error = getString(R.string.no_vacio)
+            return false
+        }else{
+            contrasenaLayout.error = ""
+        }
+        if(numeroDocumentoLayout.editText?.text.toString().isEmpty()){
+            contrasenaLayout.error = getString(R.string.no_vacio)
+            return false
+        }else{
+            numeroDocumentoLayout.error = ""
+        }
+    return true
     }
 
     fun mostrarSnackBar(mensaje : String){

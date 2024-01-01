@@ -2,10 +2,14 @@ package com.holman.test.testtullave
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.holman.test.testtullave.interfaces.InterfazRegistroUsuario
 import com.holman.test.testtullave.presenters.RegistroUsuarioPresenter
 
@@ -13,31 +17,45 @@ class RegistroActivity : AppCompatActivity(), InterfazRegistroUsuario.Vista {
 
     lateinit var presentador: RegistroUsuarioPresenter
     lateinit var botonRegistro: Button
-    lateinit var numeroDocumento: EditText
-    lateinit var contrasena: EditText
     lateinit var dialog: AlertDialog
+
+    lateinit var nombres: TextInputEditText
+    lateinit var apellidos: TextInputEditText
+    lateinit var direccion: TextInputEditText
+    lateinit var correo: TextInputEditText
+    lateinit var tipoDocumento: TextInputEditText
+    lateinit var numeroDocumento: TextInputEditText
+    lateinit var contrasena: TextInputEditText
+    lateinit var spinner: TextInputLayout
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_registro)
-        presentador = RegistroUsuarioPresenter(this, this)
+        presentador = RegistroUsuarioPresenter(this)
         inicializarInterfaz()
     }
 
     fun inicializarInterfaz() {
         botonRegistro = findViewById(R.id.botonRegistroRegistro)
+
+        nombres = findViewById(R.id.editNombresRegistro)
+        apellidos = findViewById(R.id.editApellidoRegistro)
+        direccion = findViewById(R.id.editDireccionRegistro)
+        correo = findViewById(R.id.editCorreoRegistro)
+        //tipoDocumento
         contrasena = findViewById(R.id.editContrasenaRegistro)
         numeroDocumento = findViewById(R.id.editNumeroDocumentoRegistro)
 
         botonRegistro.setOnClickListener {
             presentador.registrarUsuario(
                 this,
-                "",
-                "",
-                "",
-                "",
+                nombres.text.toString(),
+                apellidos.text.toString(),
+                direccion.text.toString(),
+                correo.text.toString(),
                 "",
                 numeroDocumento.text.toString(),
                 contrasena.text.toString()
@@ -49,6 +67,12 @@ class RegistroActivity : AppCompatActivity(), InterfazRegistroUsuario.Vista {
         builder.setCancelable(false)
         builder.setView(R.layout.dialog_cargando)
         dialog = builder.create()
+
+        spinner = findViewById(R.id.spinnerTipoDocumentoRegistro)
+
+        val documentos = resources.getStringArray(R.array.options_documentos)
+        val adapter = ArrayAdapter(this, R.layout.list_item, documentos)
+        (spinner.editText as? AutoCompleteTextView)?.setAdapter(adapter)
     }
 
     override fun mostrarCargando() {
@@ -65,7 +89,6 @@ class RegistroActivity : AppCompatActivity(), InterfazRegistroUsuario.Vista {
     override fun resultadoRegistro(resultado: Boolean) {
         if (resultado) {
             mostrarSnackBar(resources.getString(R.string.registro_exitoso))
-            finish()
         } else {
             mostrarSnackBar(resources.getString(R.string.registro_error))
         }

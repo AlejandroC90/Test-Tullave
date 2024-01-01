@@ -12,8 +12,8 @@ interface UsuarioDao {
     @Query("SELECT * FROM roomusuario")
     fun listarUsuariosBaseDatos(): List<RoomUsuario>
 
-    @Query("SELECT * from roomusuario WHERE documento = :documento")
-    fun buscarUsuario(documento: String): List<RoomUsuario>
+    @Query("SELECT * from roomusuario WHERE documento = :documento AND contrasena = :contrasena")
+    fun buscarUsuario(documento: String, contrasena: String): List<RoomUsuario>
 
     @Insert
     fun agregarUsuarios(vararg usuario: RoomUsuario)

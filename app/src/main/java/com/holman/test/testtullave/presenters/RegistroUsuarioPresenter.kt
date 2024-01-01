@@ -10,7 +10,7 @@ import com.holman.test.testtullave.modelos.ModeloRegistro
 import kotlinx.coroutines.launch
 
 
-class RegistroUsuarioPresenter(_vista: InterfazRegistroUsuario.Vista, context: Context) :
+class RegistroUsuarioPresenter(_vista: InterfazRegistroUsuario.Vista) :
     InterfazRegistroUsuario.Presentador, ViewModel() {
     private var vista = _vista
     private var model: ModeloRegistro = ModeloRegistro()

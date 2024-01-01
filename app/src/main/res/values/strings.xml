@@ -14,7 +14,7 @@
     <string name="registrarse">Log up</string>
     <string name="nombres">Names</string>
     <string name="apellidos">Last Names</string>
-    <string name="title_activity_tarjetas">Tarjetas</string>
+    <string name="title_activity_tarjetas">Tus Tarjetas</string>
     <string name="cedula_ciudadania">Cédula de Ciudadania</string>
     <string name="cedula_extranjeria">Cédula de extranjería</string>
     <string name="registro_civil">Registro Civil</string>
@@ -23,5 +23,17 @@
     <string name="direccion">Location</string>
     <string name="registro_exitoso">User success</string>
     <string name="registro_error">User error</string>
+    <string name="agregar">Add</string>
+    <string name="elimiar">Delete</string>
+    <string name="no_tarjetas">No cards registrered</string>
+    <string name="tus_tarjetas">Your cards</string>
+    <string name="aceptar">Accept</string>
+    <string name="cancelar">Cancel</string>
+    <string name="numero_17_digitos">17 digit Number</string>
+    <string name="error_numero_tarjeta">Must be 17 digit number</string>
+    <string name="tipo_documento">Document type</string>
+    <string name="no_vacio">No empty</string>
+    <string name="correo">Email</string>
+    <string name="agregar_tarjeta">Add card</string>
 
 </resources>

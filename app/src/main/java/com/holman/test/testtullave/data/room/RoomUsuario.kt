@@ -9,6 +9,7 @@ data class RoomUsuario (
     var id: Int = 0,
     var nombres: String? = null,
     var apellidos: String? = null,
+    var tipoDocumento: String? = null,
     var documento: String? = null,
     var direccion: String? = null,
     var correo: String? = null,

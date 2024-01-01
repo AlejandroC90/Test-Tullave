@@ -22,5 +22,17 @@
     <string name="direccion">Direccion</string>
     <string name="registro_exitoso">Usuario Registrado con éxito</string>
     <string name="registro_error">Usuario Registrado con error</string>
+    <string name="agregar">Agregar</string>
+    <string name="elimiar">Eliminar</string>
+    <string name="no_tarjetas">No tienes tarjetas registradas</string>
+    <string name="tus_tarjetas">Tus tarjetas</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="numero_17_digitos">Numero de 17 digitos</string>
+    <string name="error_numero_tarjeta">Debe ser un numero de 17 digitos</string>
+    <string name="tipo_documento">Tipo de documento</string>
+    <string name="no_vacio">No puede ser vacio</string>
+    <string name="correo">Correo</string>
+    <string name="agregar_tarjeta">Añadir tarjeta</string>
 
 </resources>

@@ -4,64 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/constrain_main"
+    android:padding="40dp"
     android:layout_height="match_parent">
 
 
-    <Spinner
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/spinnerTipoDocumento"
-        android:layout_width="210dp"
-        android:layout_height="37dp"
-        android:entries="@array/options"
-        app:layout_constraintBottom_toTopOf="@+id/editNumeroDocumento"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dropDownWidth="match_parent"
+        android:hint="@string/tipo_documento"
+        app:layout_constraintBottom_toTopOf="@+id/layouteditnumerodocumento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.872" />
+        app:layout_constraintVertical_bias="0.872">
 
-    <EditText
-        android:id="@+id/editNumeroDocumento"
-        android:layout_width="wrap_content"
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:fontFamily="@font/inter"
+            android:maxLines="1"
+
+            />
+
+</com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layouteditnumerodocumento"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number"
+        android:fontFamily="@font/inter"
         android:hint="@string/numero_documento"
-        app:layout_constraintBottom_toTopOf="@+id/editContrasena"
+        app:layout_constraintBottom_toTopOf="@+id/layouteditcontrasena"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.905" />
+        app:layout_constraintVertical_bias="0.905">
 
-    <EditText
-        android:id="@+id/editContrasena"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
-        android:ems="10"
-        android:hint="@string/contrasena"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/botonInicioSesion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editNumeroDocumento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter"
+            android:maxLines="1"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layouteditcontrasena"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="44dp"
+            android:ems="10"
+            android:hint="@string/contrasena"
+            app:endIconMode="password_toggle"
+            app:layout_constraintBottom_toTopOf="@+id/botonInicioSesion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:fontFamily="@font/inter">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editContrasena"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:fontFamily="@font/inter"
+            android:maxLines="1"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/botonInicioSesion"
         android:layout_width="166dp"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:text="@string/iniciar_sesion"
         app:layout_constraintBottom_toTopOf="@+id/botonRegistro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/inter"
+        />
 
     <Button
         android:id="@+id/botonRegistro"
         android:layout_width="166dp"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="104dp"
         android:text="@string/registrarse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/inter"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
