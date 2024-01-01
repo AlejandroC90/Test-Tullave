@@ -4,7 +4,7 @@ import android.content.Context
 /**
  * Contrato para todas la aplicacion, se requiere de cargar usuarios y cargar post por usuario
  */
-interface InterfazAplicacion {
+interface InterfazInicioSesion {
 
     interface Vista {
         fun mostrarCargando()
@@ -18,6 +18,6 @@ interface InterfazAplicacion {
     }
 
     interface Modelo {
-        suspend fun iniciarSesion(context: Context): Boolean
+        suspend fun iniciarSesion(context: Context, documento: String, contrasena: String): Boolean
     }
 }

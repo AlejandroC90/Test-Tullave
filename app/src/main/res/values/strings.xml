@@ -20,5 +20,8 @@
     <string name="registro_civil">Registro Civil</string>
     <string name="please_wait">Please wait</string>
     <string name="error_inicio_sesion">Error Login In</string>
+    <string name="direccion">Location</string>
+    <string name="registro_exitoso">User success</string>
+    <string name="registro_error">User error</string>
 
 </resources>

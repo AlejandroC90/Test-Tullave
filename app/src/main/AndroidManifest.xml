@@ -18,6 +18,11 @@
             android:label="@string/title_activity_registro"
             android:theme="@style/Theme.TestTullave" />
         <activity
+            android:name=".TarjetasActivity"
+            android:exported="false"
+            android:label="@string/title_activity_tarjetas"
+            android:theme="@style/Theme.TestTullave" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"

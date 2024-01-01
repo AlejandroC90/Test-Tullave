@@ -19,5 +19,8 @@
     <string name="previous">Antes</string>
     <string name="please_wait">Por favor espere</string>
     <string name="error_inicio_sesion">Error inicio de sesion</string>
+    <string name="direccion">Direccion</string>
+    <string name="registro_exitoso">Usuario Registrado con éxito</string>
+    <string name="registro_error">Usuario Registrado con error</string>
 
 </resources>

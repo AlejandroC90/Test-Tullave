@@ -1,19 +1,24 @@
 package com.holman.test.testtullave
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
-import com.holman.test.testtullave.interfaces.InterfazAplicacion
+import android.widget.EditText
+import com.holman.test.testtullave.interfaces.InterfazInicioSesion
 import com.holman.test.testtullave.presenters.InicioSesionPresenter
 
-class MainActivity : AppCompatActivity(), InterfazAplicacion.Vista {
+class MainActivity : AppCompatActivity(), InterfazInicioSesion.Vista {
 
     var presentador: InicioSesionPresenter? = null
     lateinit var dialog: AlertDialog
     lateinit var botonInicioSesion: Button
     lateinit var botonRegistro: Button
+    lateinit var numeroDocumento: EditText
+    lateinit var contrasena: EditText
+
 
 
 
@@ -28,10 +33,18 @@ class MainActivity : AppCompatActivity(), InterfazAplicacion.Vista {
     }
 
     fun inicializar() {
-        //boton para busqueda de usuarios
+
+        numeroDocumento = findViewById(R.id.editNumeroDocumento)
+
+
         botonInicioSesion = findViewById(R.id.botonInicioSesion)
         botonInicioSesion.setOnClickListener {
-            presentador?.iniciarSesion(this,"a","b")
+            presentador?.iniciarSesion(this,numeroDocumento.text.toString(),"b")
+        }
+
+        botonRegistro = findViewById(R.id.botonRegistro)
+        botonRegistro.setOnClickListener{
+            startActivity(Intent(this,RegistroActivity::class.java))
         }
 
         //inicializacion de Alert Dialog para mostrar el cargando o no
@@ -61,7 +74,7 @@ class MainActivity : AppCompatActivity(), InterfazAplicacion.Vista {
 
     override fun resultadoInicioSesion(resultado: Boolean) {
         if(resultado){
-
+            startActivity(Intent(this,TarjetasActivity::class.java))
         }else{
             mostrarSnackBar(resources.getString(R.string.error_inicio_sesion))
         }

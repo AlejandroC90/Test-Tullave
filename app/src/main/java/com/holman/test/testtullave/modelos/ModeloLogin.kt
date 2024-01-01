@@ -1,15 +1,15 @@
 package com.holman.test.testtullave.modelos
 
 import android.content.Context
-import com.holman.test.testtullave.data.Repositorio
-import com.holman.test.testtullave.interfaces.InterfazAplicacion
+import com.holman.test.testtullave.data.RepositorioUsuarios
+import com.holman.test.testtullave.interfaces.InterfazInicioSesion
 import kotlinx.coroutines.delay
 
-class ModeloLogin : InterfazAplicacion.Modelo {
-    var repositorio: Repositorio = Repositorio()
+class ModeloLogin : InterfazInicioSesion.Modelo {
+    var repositorio: RepositorioUsuarios = RepositorioUsuarios()
 
-    override suspend fun iniciarSesion(context: Context): Boolean {
+    override suspend fun iniciarSesion(context: Context, documento: String, contrasena: String): Boolean {
         delay(2000)
-        return repositorio.iniciarSesion("a", "b")
+        return repositorio.iniciarSesion(context,documento, contrasena)
     }
 }
