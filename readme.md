@@ -1,10 +1,9 @@
-## Proyecto de Prueba para ingreso a Ceiba
+## Proyecto de Evaluación Técnica
 
-Permite listar usuarios los cuales cuentan con diferentes publicaciones, se puede ver información del usuario tal como nombres y correo, y también permite visualizar las publicaciones de estos usuarios, cuenta en un cuadro de búsqueda para filtrar los usuarios.
+Aplicación de administración de tarjetas para usuarios, permite registrar usuarios de manera local, estos puedes se pueden loggear, para luego agregar o borrar tarjetas de las cuales pueden ver las información pertinente
+
+Utiliza la arquitectura MVP con lenguaje Kotlin y vistas XML, está disponible en idioma Español e Inglés
 
 Funciona usando las siguientes librerías:
-- Servicios Web usando Volley
-- Almacenamiento local usando Room
-- Recycler Views para listas
-- Arquitectura MVP
-- Idioma Inglés y Español
+- Volley para el consumo de servicios
+- Room para el almacenamiento local
