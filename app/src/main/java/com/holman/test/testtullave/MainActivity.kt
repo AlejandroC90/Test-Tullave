@@ -14,6 +14,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.holman.test.testtullave.interfaces.InterfazInicioSesion
 import com.holman.test.testtullave.presenters.InicioSesionPresenter
+import java.io.Serializable
 
 class MainActivity : AppCompatActivity(), InterfazInicioSesion.Vista {
 
@@ -109,7 +110,11 @@ class MainActivity : AppCompatActivity(), InterfazInicioSesion.Vista {
 
     override fun resultadoInicioSesion(resultado: Boolean) {
         if(resultado){
-            startActivity(Intent(this,TarjetasActivity::class.java))
+            val bundle:Bundle= Bundle().apply {
+                putString("user", "")
+                putString("documento", numeroDocumento.text.toString())
+            }
+            startActivity(Intent(this,TarjetasActivity::class.java).putExtras(bundle))
         }else{
             mostrarSnackBar(resources.getString(R.string.error_inicio_sesion))
         }

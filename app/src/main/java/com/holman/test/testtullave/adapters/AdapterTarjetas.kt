@@ -21,8 +21,8 @@ class AdapterTarjetas(
 
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-        val txtNombre: TextView = itemView.findViewById(R.id.nombre_tarjeta)
-        val txtTelefono: TextView = itemView.findViewById(R.id.numero_tarjeta)
+        val txtNombreTarjeta: TextView = itemView.findViewById(R.id.nombre_tarjeta)
+        val txtNumeroTarjeta: TextView = itemView.findViewById(R.id.numero_tarjeta)
         val bottonPublicacion: Button = itemView.findViewById(R.id.boton_eliminar_tarjeta)
     }
 
@@ -33,9 +33,7 @@ class AdapterTarjetas(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val u = listadoUsuarios[position]
-        holder.txtNombre.text = u.number
-        holder.txtTelefono.text = u.saldo
-
+        holder.txtNumeroTarjeta.text = u.numero
         holder.bottonPublicacion.setOnClickListener {
             itemClicked(u)
         }

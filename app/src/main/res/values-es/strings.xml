@@ -34,5 +34,6 @@
     <string name="no_vacio">No puede ser vacio</string>
     <string name="correo">Correo</string>
     <string name="agregar_tarjeta">Añadir tarjeta</string>
+    <string name="ver_informacion">Ver información</string>
 
 </resources>

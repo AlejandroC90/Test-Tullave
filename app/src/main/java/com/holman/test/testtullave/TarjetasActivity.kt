@@ -4,6 +4,8 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -24,20 +26,18 @@ class TarjetasActivity : AppCompatActivity(), InterfazTarjetas.Vista {
     lateinit var dialog: AlertDialog
     lateinit var recyclearViewUsuarios: RecyclerView
     lateinit var notarjetas: TextView
-    lateinit var botonAgregarTarjeta: Button
-
-
+    private lateinit var docUsuario: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_tarjetas)
+        revisarExtras()
 
         inicializar()
-        presentador = TarjetasPresenter(this, this)
+        presentador = TarjetasPresenter(this, this, docUsuario)
         setSupportActionBar(findViewById(R.id.toolbar_tarjetas))
-
     }
 
     fun inicializar() {
@@ -52,10 +52,22 @@ class TarjetasActivity : AppCompatActivity(), InterfazTarjetas.Vista {
         recyclearViewUsuarios = findViewById(R.id.listado_tarjetas_usuario)
         recyclearViewUsuarios.layoutManager = LinearLayoutManager(this)
 
-        botonAgregarTarjeta = findViewById(R.id.botonAgregarTarjeta)
-        botonAgregarTarjeta.setOnClickListener {
-            mostrarDialogoAgregarTarjeta()
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_add_card -> {
+                mostrarDialogoAgregarTarjeta()
+                return true
+            }
         }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun mostrarCargando() {
@@ -71,13 +83,14 @@ class TarjetasActivity : AppCompatActivity(), InterfazTarjetas.Vista {
 
     override fun mostrarTarjetas(tarjetas: List<Tarjeta>) {
 
-        if(recyclearViewUsuarios.visibility.equals(View.INVISIBLE)){
+        if (recyclearViewUsuarios.visibility.equals(View.INVISIBLE)) {
             recyclearViewUsuarios.visibility = View.VISIBLE
             notarjetas.visibility = View.INVISIBLE
         }
         recyclearViewUsuarios.adapter = AdapterTarjetas(tarjetas) { it: Tarjeta ->
-            it.number?.let { it1 ->
-                mostrarDialogoConfirmacion("Esta seguro que desea borrar la tarjeta ${it.number}",
+            it.numero?.let { it1 ->
+                mostrarDialogoConfirmacion(
+                    "¿Esta seguro/a que desea borrar la tarjeta ${it.numero}?",
                     it1
                 )
             }
@@ -90,25 +103,25 @@ class TarjetasActivity : AppCompatActivity(), InterfazTarjetas.Vista {
     }
 
     override fun tarjetaCreada(resultado: Boolean) {
-        if(resultado){
-            mostrarSnackBar( "Tarjeta creada con exito")
-            presentador.listarTarjetas(this)
-        }else{
-            mostrarSnackBar( "Tarjeta creada con error")
+        if (resultado) {
+            mostrarSnackBar("Tarjeta creada con exito")
+            presentador.listarTarjetas(this, docUsuario)
+        } else {
+            mostrarSnackBar("Tarjeta creada con error")
         }
     }
 
     override fun tarjetaBorrada(resultado: Boolean) {
-        if(resultado){
-            mostrarSnackBar( "Tarjeta borrada con exito")
-            presentador.listarTarjetas(this)
-        }else{
-            mostrarSnackBar( "Tarjeta borrada con error")
+        if (resultado) {
+            mostrarSnackBar("Tarjeta borrada con exito")
+            presentador.listarTarjetas(this, docUsuario)
+        } else {
+            mostrarSnackBar("Tarjeta borrada con error")
         }
 
     }
 
-    fun mostrarSnackBar(mensaje : String){
+    fun mostrarSnackBar(mensaje: String) {
         Snackbar.make(findViewById(R.id.constrain_tarjetas), mensaje, Snackbar.LENGTH_LONG).show()
     }
 
@@ -128,7 +141,7 @@ class TarjetasActivity : AppCompatActivity(), InterfazTarjetas.Vista {
             val enteredNumber = editTextNumber.text.toString()
 
             if (enteredNumber.length == 16) {
-                presentador.agregarTarjeta(this, enteredNumber)
+                presentador.agregarTarjeta(this, enteredNumber, docUsuario)
                 dialog.dismiss()
             } else {
                 // Show an error or prompt the user to enter a valid number
@@ -159,5 +172,16 @@ class TarjetasActivity : AppCompatActivity(), InterfazTarjetas.Vista {
         }
 
         dialog.show()
+    }
+
+    /**
+     * Funcion que trae el documento del usuario loggeado
+     */
+    private fun revisarExtras() {
+        intent?.extras?.let {
+            if (it.containsKey("documento")) {
+                docUsuario = it.getString("documento").toString()
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.holman.test.testtullave.interfaces
 
 import android.content.Context
 import com.holman.test.pruebainfotullave.data.Tarjeta
+import com.holman.test.testtullave.data.api.VolleyCallBack
 
 interface InterfazTarjetas {
 
@@ -18,14 +19,14 @@ interface InterfazTarjetas {
     }
 
     interface Presentador {
-        fun agregarTarjeta(context: Context, numero: String)
-        fun listarTarjetas(context: Context)
+        fun agregarTarjeta(context: Context, numero: String, documentoUsuario: String)
+        fun listarTarjetas(context: Context, documentoUsuario: String)
         fun eliminarTarjeta(context: Context, numero: String)
     }
 
     interface Modelo {
-        fun agregarTarjeta(context: Context, numero: String): Boolean
-        suspend fun listarTarjetas(context: Context): List<Tarjeta>
+        suspend fun agregarTarjeta(context: Context, numero: String, documentoUsuario: String, volleyCallBack: VolleyCallBack)
+        suspend fun listarTarjetas(context: Context, documentoUsuario: String): List<Tarjeta>
         fun eliminarTarjeta(context: Context, numero: String): Boolean
     }
 

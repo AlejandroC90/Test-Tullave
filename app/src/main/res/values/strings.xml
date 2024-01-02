@@ -35,5 +35,6 @@
     <string name="no_vacio">No empty</string>
     <string name="correo">Email</string>
     <string name="agregar_tarjeta">Add card</string>
+    <string name="ver_informacion">See info</string>
 
 </resources>
