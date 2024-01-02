@@ -31,7 +31,7 @@
                 android:fontFamily="@font/inter"
                 android:maxLines="1"
                 android:inputType="text"
-
+                android:maxLength="30"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,6 +54,7 @@
                 android:fontFamily="@font/inter"
                 android:maxLines="1"
                 android:inputType="text"
+                android:maxLength="30"
 
                 />
         </com.google.android.material.textfield.TextInputLayout>
@@ -78,8 +79,7 @@
                 android:fontFamily="@font/inter"
                 android:maxLines="1"
                 android:inputType="text"
-
-
+                android:maxLength="30"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,6 +102,7 @@
                 android:fontFamily="@font/inter"
                 android:maxLines="1"
                 android:inputType="textEmailAddress"
+                android:maxLength="30"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -118,6 +119,7 @@
             app:layout_constraintTop_toBottomOf="@+id/inputLayoutCorreoRegistro">
 
             <AutoCompleteTextView
+                android:id="@+id/autoCompleteRegistro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter"
@@ -147,6 +149,7 @@
                 android:fontFamily="@font/inter"
                 android:maxLines="1"
                 android:inputType="number"
+                android:maxLength="10"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -170,6 +173,7 @@
                 android:fontFamily="@font/inter"
                 android:inputType="textPassword"
                 android:maxLines="1"
+                android:maxLength="30"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 

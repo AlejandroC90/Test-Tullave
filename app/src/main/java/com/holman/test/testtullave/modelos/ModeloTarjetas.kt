@@ -5,6 +5,7 @@ import com.holman.test.pruebainfotullave.data.Tarjeta
 import com.holman.test.testtullave.data.RepositorioTarjetas
 import com.holman.test.testtullave.data.RepositorioUsuarios
 import com.holman.test.testtullave.data.api.VolleyCallBack
+import com.holman.test.testtullave.data.api.VolleyCallBackTarjeta
 import com.holman.test.testtullave.interfaces.InterfazInicioSesion
 import com.holman.test.testtullave.interfaces.InterfazRegistroUsuario
 import com.holman.test.testtullave.interfaces.InterfazTarjetas
@@ -14,6 +15,10 @@ class ModeloTarjetas : InterfazTarjetas.Modelo {
     var repositorio: RepositorioTarjetas = RepositorioTarjetas()
     override suspend fun agregarTarjeta(context: Context, numero: String, documentoUsuario: String, volleyCallBack: VolleyCallBack) {
         return repositorio.agregarTarjeta(context, numero, documentoUsuario, volleyCallBack)
+    }
+
+    override suspend fun verInformacionTarjeta(context: Context, numero: String, volleyCallBackTarjeta: VolleyCallBackTarjeta) {
+        return repositorio.buscarInformacionTarjeta(context, numero,  volleyCallBackTarjeta)
     }
 
     override suspend fun listarTarjetas(context: Context, documentoUsuario: String):List<Tarjeta> {

@@ -29,12 +29,20 @@
     <string name="tus_tarjetas">Your cards</string>
     <string name="aceptar">Accept</string>
     <string name="cancelar">Cancel</string>
-    <string name="numero_17_digitos">17 digit Number</string>
-    <string name="error_numero_tarjeta">Must be 17 digit number</string>
+    <string name="numero_17_digitos">16 digit Number</string>
+    <string name="error_numero_tarjeta">Must be 16 digit number</string>
     <string name="tipo_documento">Document type</string>
     <string name="no_vacio">No empty</string>
     <string name="correo">Email</string>
     <string name="agregar_tarjeta">Add card</string>
     <string name="ver_informacion">See info</string>
+    <string name="error_consulta_tarjeta">Error loading info</string>
+    <string name="nombre">Name</string>
+    <string name="numero">Number</string>
+    <string name="banco">Bank</string>
+    <string name="info_tarjeta_titulo">Card Info</string>
+    <string name="longitud_incorrecta">Wrong length</string>
+    <string name="tarjeta_no_valida">No valid card</string>
+    <string name="perfil">Profile</string>
 
 </resources>

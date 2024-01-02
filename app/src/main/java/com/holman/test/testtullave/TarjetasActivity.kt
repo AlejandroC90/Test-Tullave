@@ -16,14 +16,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.holman.test.pruebainfotullave.data.Tarjeta
+import com.holman.test.pruebainfotullave.data.TarjetaDetalle
 import com.holman.test.testtullave.adapters.AdapterTarjetas
 import com.holman.test.testtullave.interfaces.InterfazTarjetas
 import com.holman.test.testtullave.presenters.TarjetasPresenter
+import java.io.Serializable
 
 class TarjetasActivity : AppCompatActivity(), InterfazTarjetas.Vista {
 
     lateinit var presentador: TarjetasPresenter
-    lateinit var dialog: AlertDialog
+    lateinit var loadingDialog: AlertDialog
     lateinit var recyclearViewUsuarios: RecyclerView
     lateinit var notarjetas: TextView
     private lateinit var docUsuario: String
@@ -44,15 +46,13 @@ class TarjetasActivity : AppCompatActivity(), InterfazTarjetas.Vista {
         val builder = AlertDialog.Builder(this)
         builder.setCancelable(false)
         builder.setView(R.layout.dialog_cargando)
-        dialog = builder.create()
+        loadingDialog = builder.create()
 
         notarjetas = findViewById(R.id.text_no_tarjetas)
 
         //inicializacion de la lista de objetos - recycler view
         recyclearViewUsuarios = findViewById(R.id.listado_tarjetas_usuario)
         recyclearViewUsuarios.layoutManager = LinearLayoutManager(this)
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -71,13 +71,12 @@ class TarjetasActivity : AppCompatActivity(), InterfazTarjetas.Vista {
     }
 
     override fun mostrarCargando() {
-        dialog.show()
-
+        loadingDialog.show()
     }
 
     override fun ocultarCargando() {
-        if (dialog.isShowing) {
-            dialog.hide()
+        if (loadingDialog.isShowing) {
+            loadingDialog.hide()
         }
     }
 
@@ -87,14 +86,16 @@ class TarjetasActivity : AppCompatActivity(), InterfazTarjetas.Vista {
             recyclearViewUsuarios.visibility = View.VISIBLE
             notarjetas.visibility = View.INVISIBLE
         }
-        recyclearViewUsuarios.adapter = AdapterTarjetas(tarjetas) { it: Tarjeta ->
+        recyclearViewUsuarios.adapter = AdapterTarjetas(tarjetas, itemClicked = { it: Tarjeta ->
             it.numero?.let { it1 ->
                 mostrarDialogoConfirmacion(
                     "¿Esta seguro/a que desea borrar la tarjeta ${it.numero}?",
                     it1
                 )
             }
-        }
+        }, itemClickedInformacion = { it: Tarjeta ->
+            it.numero?.let { it1 -> presentador.verInformacionTarjeta(this, it.numero) }
+        })
     }
 
     override fun zeroTarjetas() {
@@ -104,27 +105,50 @@ class TarjetasActivity : AppCompatActivity(), InterfazTarjetas.Vista {
 
     override fun tarjetaCreada(resultado: Boolean) {
         if (resultado) {
-            mostrarSnackBar("Tarjeta creada con exito")
+            mostrarSnackBar("Tarjeta creada con exito", true)
             presentador.listarTarjetas(this, docUsuario)
         } else {
-            mostrarSnackBar("Tarjeta creada con error")
+            mostrarSnackBar("Ocurrio un error al crear la tarjeta", false)
         }
+    }
+
+    override fun tarjetaNoValida() {
+        mostrarSnackBar(getString(R.string.tarjeta_no_valida), false)
     }
 
     override fun tarjetaBorrada(resultado: Boolean) {
         if (resultado) {
-            mostrarSnackBar("Tarjeta borrada con exito")
+            mostrarSnackBar("Tarjeta borrada con exito", true)
             presentador.listarTarjetas(this, docUsuario)
         } else {
-            mostrarSnackBar("Tarjeta borrada con error")
+            mostrarSnackBar("Ha ocurrido un error al borrar la tarjeta", false)
         }
 
     }
 
-    fun mostrarSnackBar(mensaje: String) {
-        Snackbar.make(findViewById(R.id.constrain_tarjetas), mensaje, Snackbar.LENGTH_LONG).show()
+    override fun tarjetaConsultada(resultado: Boolean, tarjetaDetalle: TarjetaDetalle) {
+        if(resultado){
+            val bundle:Bundle= Bundle().apply {
+                //putString("user", "")
+                putSerializable("tarjeta", tarjetaDetalle as Serializable)
+            }
+            startActivity(Intent(this,InformacionTarjeta::class.java).putExtras(bundle))
+        }else{
+            mostrarSnackBar(resources.getString(R.string.error_consulta_tarjeta), false)
+        }
     }
 
+    fun mostrarSnackBar(mensaje: String, exito: Boolean) {
+        if(exito){
+            Snackbar.make(findViewById(R.id.constrain_tarjetas), mensaje, Snackbar.LENGTH_LONG).setBackgroundTint(getColor(R.color.md_theme_light_primary)).show()
+        }else{
+            Snackbar.make(findViewById(R.id.constrain_tarjetas), mensaje, Snackbar.LENGTH_LONG).setBackgroundTint(getColor(R.color.md_theme_light_error)).show()
+        }
+    }
+
+    /**
+     * Funcion que muestra el dialogo de agregar tarjeta para que el usuario pueda digitar una tarjeta
+     */
     private fun mostrarDialogoAgregarTarjeta() {
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.dialogo_agregar)
@@ -152,6 +176,10 @@ class TarjetasActivity : AppCompatActivity(), InterfazTarjetas.Vista {
         dialog.show()
     }
 
+    /**
+     * Funciona que muestra el dialogo de confirmacion de borrado al momento de
+     * eliminar una tarjeta
+     */
     private fun mostrarDialogoConfirmacion(message: String, numero: String) {
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.dialog_confirmacion_borrado)
@@ -175,7 +203,7 @@ class TarjetasActivity : AppCompatActivity(), InterfazTarjetas.Vista {
     }
 
     /**
-     * Funcion que trae el documento del usuario loggeado
+     * Funcion que trae el documento del usuario loggeado enviado desde la pantalla principal
      */
     private fun revisarExtras() {
         intent?.extras?.let {

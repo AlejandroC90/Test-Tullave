@@ -20,13 +20,21 @@ class RegistroActivity : AppCompatActivity(), InterfazRegistroUsuario.Vista {
     lateinit var dialog: AlertDialog
 
     lateinit var nombres: TextInputEditText
+    lateinit var nombresLayout: TextInputLayout
     lateinit var apellidos: TextInputEditText
+    lateinit var apellidosLayout: TextInputLayout
     lateinit var direccion: TextInputEditText
+    lateinit var direccionLayout: TextInputLayout
     lateinit var correo: TextInputEditText
+    lateinit var correoLayout: TextInputLayout
     lateinit var tipoDocumento: TextInputEditText
     lateinit var numeroDocumento: TextInputEditText
+    lateinit var numeroDocumentoLayout: TextInputLayout
     lateinit var contrasena: TextInputEditText
+    lateinit var contrasenaLayout: TextInputLayout
+
     lateinit var spinner: TextInputLayout
+    lateinit var autoCompleteTextView: AutoCompleteTextView
 
 
 
@@ -49,17 +57,27 @@ class RegistroActivity : AppCompatActivity(), InterfazRegistroUsuario.Vista {
         contrasena = findViewById(R.id.editContrasenaRegistro)
         numeroDocumento = findViewById(R.id.editNumeroDocumentoRegistro)
 
+        autoCompleteTextView = findViewById(R.id.autoCompleteRegistro)
+
+        nombresLayout = findViewById(R.id.inputLayoutNombresRegistro)
+        apellidosLayout = findViewById(R.id.inputLayoutApellidosRegistro)
+        correoLayout = findViewById(R.id.inputLayoutCorreoRegistro)
+        numeroDocumentoLayout = findViewById(R.id.inputLayoutNumeroDocumentoRegistro)
+        contrasenaLayout = findViewById(R.id.layouteditcontrasenaRegistro)
+
         botonRegistro.setOnClickListener {
-            presentador.registrarUsuario(
-                this,
-                nombres.text.toString(),
-                apellidos.text.toString(),
-                direccion.text.toString(),
-                correo.text.toString(),
-                "",
-                numeroDocumento.text.toString(),
-                contrasena.text.toString()
-            )
+            if(validarFormulario()){
+                presentador.registrarUsuario(
+                    this,
+                    nombres.text.toString(),
+                    apellidos.text.toString(),
+                    direccion.text.toString(),
+                    correo.text.toString(),
+                    autoCompleteTextView.text.toString(),
+                    numeroDocumento.text.toString(),
+                    contrasena.text.toString()
+                )
+            }
         }
 
         //inicializacion de Alert Dialog para mostrar el cargando o no
@@ -73,6 +91,51 @@ class RegistroActivity : AppCompatActivity(), InterfazRegistroUsuario.Vista {
         val documentos = resources.getStringArray(R.array.options_documentos)
         val adapter = ArrayAdapter(this, R.layout.list_item, documentos)
         (spinner.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+    }
+    /**
+    * Funcion que permite validar el formulario de los datos de registro
+    */
+    fun validarFormulario(): Boolean {
+        if (nombresLayout.editText?.text.toString().isEmpty()) {
+            nombresLayout.error = getString(R.string.no_vacio)
+            return false
+        } else {
+            nombresLayout.error = ""
+        }
+        if (apellidosLayout.editText?.text.toString().isEmpty()) {
+            apellidosLayout.error = getString(R.string.no_vacio)
+            return false
+        } else {
+            apellidosLayout.error = ""
+        }
+        if (correoLayout.editText?.text.toString().isEmpty()) {
+            correoLayout.error = getString(R.string.no_vacio)
+            return false
+        } else {
+            correoLayout.error = ""
+        }
+        if (spinner.editText?.text.toString().isEmpty()) {
+            spinner.error = getString(R.string.no_vacio)
+            return false
+        } else {
+            spinner.error = ""
+        }
+        if (numeroDocumentoLayout.editText?.text.toString().isEmpty()) {
+            numeroDocumentoLayout.error = getString(R.string.no_vacio)
+            return false
+        } else if (numeroDocumentoLayout.editText?.text.toString().length < 10) {
+            numeroDocumentoLayout.error = getString(R.string.longitud_incorrecta)
+            return false
+        } else {
+            numeroDocumentoLayout.error = ""
+        }
+        if (contrasenaLayout.editText?.text.toString().isEmpty()) {
+            contrasenaLayout.error = getString(R.string.no_vacio)
+            return false
+        } else {
+            contrasenaLayout.error = ""
+        }
+        return true
     }
 
     override fun mostrarCargando() {

@@ -12,11 +12,11 @@ class InicioSesionPresenter(_vista: InterfazInicioSesion.Vista, context: Context
     InterfazInicioSesion.Presentador, ViewModel() {
     private var vista = _vista
     private var model: ModeloLogin = ModeloLogin()
-    override fun iniciarSesion(context: Context, documento: String, contrasena: String) {
+    override fun iniciarSesion(context: Context, tipoDocumento:String, documento: String, contrasena: String) {
         viewModelScope.launch {
 
             vista.mostrarCargando()
-            val resultado = model.iniciarSesion(context, documento, contrasena)
+            val resultado = model.iniciarSesion(context,tipoDocumento, documento, contrasena)
             vista.ocultarCargando()
             vista.resultadoInicioSesion(resultado)
 

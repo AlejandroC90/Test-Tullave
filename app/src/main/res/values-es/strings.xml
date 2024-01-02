@@ -28,12 +28,20 @@
     <string name="tus_tarjetas">Tus tarjetas</string>
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
-    <string name="numero_17_digitos">Numero de 17 digitos</string>
-    <string name="error_numero_tarjeta">Debe ser un numero de 17 digitos</string>
+    <string name="numero_17_digitos">Numero de 16 digitos</string>
+    <string name="error_numero_tarjeta">Debe ser un numero de 16 digitos</string>
     <string name="tipo_documento">Tipo de documento</string>
     <string name="no_vacio">No puede ser vacio</string>
     <string name="correo">Correo</string>
     <string name="agregar_tarjeta">Añadir tarjeta</string>
     <string name="ver_informacion">Ver información</string>
+    <string name="error_consulta_tarjeta">Ocurrio un error consultando la tarjeta</string>
+    <string name="nombre">Nombre</string>
+    <string name="numero">Número</string>
+    <string name="banco">Banco</string>
+    <string name="info_tarjeta_titulo">Informacion de tu tarjeta</string>
+    <string name="longitud_incorrecta">Longitud incorrecta</string>
+    <string name="tarjeta_no_valida">Tarjeta no valida</string>
+    <string name="perfil">Perfil</string>
 
 </resources>

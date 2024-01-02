@@ -8,15 +8,21 @@ import com.holman.test.testtullave.data.room.UsuarioDao
 
 class RepositorioUsuarios {
 
-    fun iniciarSesion(context: Context, documento: String, contrasena: String): Boolean{
+    /**
+     * Funcion que permite a un usuario iniciar sesión usando los datos de registro
+     */
+    fun iniciarSesion(context: Context, tipoDocumento: String, documento: String, contrasena: String): Boolean{
         var bd = interfazDBParaUsuarios(context)
 
-        var listado = bd.buscarUsuario(documento, contrasena)
+        var listado = bd.buscarUsuario( tipoDocumento, documento, contrasena)
 
         return !listado.isEmpty()
     }
 
 
+    /**
+     * Funcion que permite registrar un usuario a la base de datos local
+     */
     fun registrarUsuario(context: Context,
                          nombres: String,
                          apellidos: String,
@@ -28,16 +34,22 @@ class RepositorioUsuarios {
         var bd = interfazDBParaUsuarios(context)
 
         return try {
-            bd.agregarUsuarios(RoomUsuario(
-                nombres = nombres,
-                apellidos = apellidos,
-                documento = numeroDocumento,
-                tipoDocumento = tipoDocumento,
-                contrasena = contrasena,
-                correo = correo,
-                direccion = direccion
-            ))
-            true
+            var usuarioActual = bd.buscarUsuarioRegistro(tipoDocumento, numeroDocumento)
+
+            //el usuario no existe
+            if(usuarioActual.isEmpty()){
+                bd.agregarUsuarios(RoomUsuario(
+                    nombres = nombres,
+                    apellidos = apellidos,
+                    documento = numeroDocumento,
+                    tipoDocumento = tipoDocumento,
+                    contrasena = contrasena,
+                    correo = correo,
+                    direccion = direccion
+                ))
+                true
+            }
+            false
         }catch (e : Exception){
             false
         }

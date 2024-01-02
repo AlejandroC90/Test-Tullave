@@ -2,7 +2,7 @@ package com.holman.test.testtullave.interfaces
 import android.content.Context
 
 /**
- * Contrato para todas la aplicacion, se requiere de cargar usuarios y cargar post por usuario
+ * Interfaz usada para las clases que permiten la ejecucion del inicio de sesión
  */
 interface InterfazInicioSesion {
 
@@ -14,10 +14,10 @@ interface InterfazInicioSesion {
     }
 
     interface Presentador {
-        fun iniciarSesion(context: Context, documento: String, contrasena: String)
+        fun iniciarSesion(context: Context, tipoDocumento :String, documento: String, contrasena: String)
     }
 
     interface Modelo {
-        suspend fun iniciarSesion(context: Context, documento: String, contrasena: String): Boolean
+        suspend fun iniciarSesion(context: Context, tipoDocumento :String, documento: String, contrasena: String): Boolean
     }
 }

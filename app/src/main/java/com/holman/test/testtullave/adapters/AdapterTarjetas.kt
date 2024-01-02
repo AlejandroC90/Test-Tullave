@@ -10,19 +10,20 @@ import com.holman.test.pruebainfotullave.data.Tarjeta
 import com.holman.test.testtullave.R
 
 /**
- * Adapter para mostrar el listado de usuarios despues de cargar
+ * Adapter para mostrar el listado de tarjetas despues de iniciar sesión
  * usando un Recycler View
  */
 class AdapterTarjetas(
     private val listadoUsuarios: List<Tarjeta>,
     private var itemClicked: ((tarjeta: Tarjeta) -> Unit),
-) :
+    private var itemClickedInformacion: ((tarjeta: Tarjeta) -> Unit)) :
     RecyclerView.Adapter<AdapterTarjetas.ViewHolder>() {
 
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val txtNombreTarjeta: TextView = itemView.findViewById(R.id.nombre_tarjeta)
         val txtNumeroTarjeta: TextView = itemView.findViewById(R.id.numero_tarjeta)
+        val bottonVerInformacion: Button = itemView.findViewById(R.id.boton_ver_informacion_tarjeta)
         val bottonPublicacion: Button = itemView.findViewById(R.id.boton_eliminar_tarjeta)
     }
 
@@ -36,6 +37,9 @@ class AdapterTarjetas(
         holder.txtNumeroTarjeta.text = u.numero
         holder.bottonPublicacion.setOnClickListener {
             itemClicked(u)
+        }
+        holder.bottonVerInformacion.setOnClickListener {
+            itemClickedInformacion(u)
         }
     }
 

@@ -8,8 +8,8 @@ import kotlinx.coroutines.delay
 class ModeloLogin : InterfazInicioSesion.Modelo {
     var repositorio: RepositorioUsuarios = RepositorioUsuarios()
 
-    override suspend fun iniciarSesion(context: Context, documento: String, contrasena: String): Boolean {
+    override suspend fun iniciarSesion(context: Context, tipoDocumento: String, documento: String, contrasena: String): Boolean {
         delay(2000)
-        return repositorio.iniciarSesion(context, documento, contrasena)
+        return repositorio.iniciarSesion(context, tipoDocumento,  documento, contrasena)
     }
 }

@@ -28,10 +28,7 @@ class MainActivity : AppCompatActivity(), InterfazInicioSesion.Vista {
     lateinit var contrasenaLayout: TextInputLayout
 
     lateinit var spinner: TextInputLayout
-
-
-
-
+    lateinit var autoCompleteTextView: AutoCompleteTextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +39,9 @@ class MainActivity : AppCompatActivity(), InterfazInicioSesion.Vista {
         presentador = InicioSesionPresenter(this, this)
     }
 
+    /**
+     * Funcion que inicializa la interfaz de la pantalla principal
+     */
     fun inicializar() {
 
         numeroDocumento = findViewById(R.id.editNumeroDocumento)
@@ -50,14 +50,19 @@ class MainActivity : AppCompatActivity(), InterfazInicioSesion.Vista {
 
         botonInicioSesion = findViewById(R.id.botonInicioSesion)
         botonInicioSesion.setOnClickListener {
-            if(validarFormulario()){
-                presentador?.iniciarSesion(this,numeroDocumento.text.toString(),contrasena.text.toString())
+            if (validarFormulario()) {
+                presentador?.iniciarSesion(
+                    this,
+                    autoCompleteTextView.text.toString(),
+                    numeroDocumento.text.toString(),
+                    contrasena.text.toString()
+                )
             }
         }
 
         botonRegistro = findViewById(R.id.botonRegistro)
-        botonRegistro.setOnClickListener{
-            startActivity(Intent(this,RegistroActivity::class.java))
+        botonRegistro.setOnClickListener {
+            startActivity(Intent(this, RegistroActivity::class.java))
         }
 
         //inicializacion de Alert Dialog para mostrar el cargando o no
@@ -72,28 +77,41 @@ class MainActivity : AppCompatActivity(), InterfazInicioSesion.Vista {
         val adapter = ArrayAdapter(this, R.layout.list_item, documentos)
         (spinner.editText as? AutoCompleteTextView)?.setAdapter(adapter)
 
-
         contrasenaLayout = findViewById(R.id.layouteditcontrasena)
         numeroDocumentoLayout = findViewById(R.id.layouteditnumerodocumento)
+
+        autoCompleteTextView = findViewById(R.id.auto_complete_login)
     }
 
-    fun validarFormulario(): Boolean{
-        if(contrasenaLayout.editText?.text.toString().isEmpty()){
-            contrasenaLayout.error = getString(R.string.no_vacio)
+    /**
+     * Funciona que permite validar el formulario de los datos de inicio de sesión
+     */
+    fun validarFormulario(): Boolean {
+        if (spinner.editText?.text.toString().isEmpty()) {
+            spinner.error = getString(R.string.no_vacio)
             return false
-        }else{
-            contrasenaLayout.error = ""
+        } else {
+            spinner.error = ""
         }
-        if(numeroDocumentoLayout.editText?.text.toString().isEmpty()){
-            contrasenaLayout.error = getString(R.string.no_vacio)
+        if (numeroDocumentoLayout.editText?.text.toString().isEmpty()) {
+            numeroDocumentoLayout.error = getString(R.string.no_vacio)
             return false
-        }else{
+        } else if (numeroDocumentoLayout.editText?.text.toString().length < 10) {
+            numeroDocumentoLayout.error = getString(R.string.longitud_incorrecta)
+            return false
+        } else {
             numeroDocumentoLayout.error = ""
         }
-    return true
+        if (contrasenaLayout.editText?.text.toString().isEmpty()) {
+            contrasenaLayout.error = getString(R.string.no_vacio)
+            return false
+        } else {
+            contrasenaLayout.error = ""
+        }
+        return true
     }
 
-    fun mostrarSnackBar(mensaje : String){
+    fun mostrarSnackBar(mensaje: String) {
         Snackbar.make(findViewById(R.id.constrain_main), mensaje, Snackbar.LENGTH_LONG).show()
     }
 
@@ -102,20 +120,24 @@ class MainActivity : AppCompatActivity(), InterfazInicioSesion.Vista {
     }
 
     override fun ocultarCargando() {
-        if(dialog.isShowing){
+        if (dialog.isShowing) {
             dialog.hide()
         }
     }
 
 
+    /**
+     * Funciona  que tomando el resultado de inicio de sesion ejecuta el mostrado de error o la navegacion a la
+     * pantalla anterior
+     */
     override fun resultadoInicioSesion(resultado: Boolean) {
-        if(resultado){
-            val bundle:Bundle= Bundle().apply {
+        if (resultado) {
+            val bundle: Bundle = Bundle().apply {
                 putString("user", "")
                 putString("documento", numeroDocumento.text.toString())
             }
-            startActivity(Intent(this,TarjetasActivity::class.java).putExtras(bundle))
-        }else{
+            startActivity(Intent(this, TarjetasActivity::class.java).putExtras(bundle))
+        } else {
             mostrarSnackBar(resources.getString(R.string.error_inicio_sesion))
         }
     }

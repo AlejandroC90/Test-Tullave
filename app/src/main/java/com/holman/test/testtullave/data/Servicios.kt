@@ -1,14 +1,6 @@
 package com.holman.test.testtullave.data
 
 class Servicios {
-
-    val BASE_URL : String  = "https://osgqhdx2wf.execute-api.us-west-2.amazonaws.com/";
-
-    //validar tarjeta
-
-    //obtener informacion de la tarjeta
-
-    // obtener saldo de la tarjeta
-
-    val TOKEN: String = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJtYWFzIiwiaXNzIjoicmJzYXMuY28iLCJjb21wYW55IjoiMTAwMiIsImV4cCI6MTcwMzQxOTI3NiwidXNlciI6InBydWViYS5hbmRyb2lkIiwiaWF0IjoxNzAzMTk2MDc2LCJHcnVwb3MiOiJbXCJVbml2ZXJzYWxSZWNoYXJnZXJcIl0ifQ.JZ6dnujyohmUYl4J4d-8tvvit4FwFxPFcPKYuoSONaEzHAsfPZw-yIV9baUXpeNd6IeJMD1AoQO7Z6Co524xldt3-2bTBIoXFxuZ-8jc1AUaVf4qJ9CxtQruOBYUdHSLMsOAF4EuNpVKDcSyRYdddXm6ZjYncSWcfl1q8MsOZDlbqM__y1CfOtJY-6DROzJzz2eNblL4bHrUNJbuPe3MOKXM9d9vsUSd3zEnRT5847_UPDJxNotIcHgHO_UhArNydq4DFG11NdUa_Wav63jjPrGEUWEVlLkxxWQ-6EDzfLFLiFP0dVfOQrWGvYnBZrhwKb6niFXqXR5tGkhidQ0Epg"
+    //Token usado para las peticiones
+    val TOKEN: String = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJtYWFzIiwiaXNzIjoicmJzYXMuY28iLCJjb21wYW55IjoiMTAwMiIsImV4cCI6MTcwNjc2MzYwMCwidXNlciI6InBydWViYS5hbmRyb2lkIiwiaWF0IjoxNzAzMTk2MDc2LCJHcnVwb3MiOiJbXCJVbml2ZXJzYWxSZWNoYXJnZXJcIl0ifQ.owc7XXx_1rtFk-vdD5WdB5NsrAH63qdHoeqrAV3PIsXrLvurZFzmx99Cg-I605gKPbSpSwvfTRuJCNMZbjqI82l5XoBxvVTsJUE5oum16j76SvhrkzmUZGrni4B_ej46FWyVn41ZEUoHUmYyliF92u4BAP5O_6L5Vl5GGLK-j48c-I49ubfEK7MXVC0Irp--1FcZs_t_yTSp4kmDIX3cyi0nH2uFpoZCsZwSY9tMx3hDetYnn023u0Peih6RqnKUkSPfpsGVvWQ9bXNFvym0sn8kyxlCWM5YvucuQiXOMlb0TJb_AXns5Mz6M2t5G9zy7hBXK7CttB6ZdDO4m80vwg"
 }

@@ -36,6 +36,7 @@
         app:layout_constraintVertical_bias="0.872">
 
         <AutoCompleteTextView
+            android:id="@+id/auto_complete_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter"
@@ -67,6 +68,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter"
             android:maxLines="1"
+            android:maxLength="10"
             android:scrollHorizontally="true"
             android:inputType="number"
             />
@@ -92,7 +94,7 @@
             android:inputType="textPassword"
             android:fontFamily="@font/inter"
             android:maxLines="1"
-
+            android:maxLength="20"
             />
     </com.google.android.material.textfield.TextInputLayout>
 

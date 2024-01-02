@@ -13,8 +13,8 @@ interface TarjetaDao {
     @Query("SELECT * FROM roomtarjeta where usuario = :usuario")
     fun listarTarjetas(usuario: String): List<RoomTarjeta>
 
-    @Query("SELECT * FROM roomtarjeta where numero = :numero")
-    fun buscarTarjeta(numero: String): List<RoomTarjeta>
+    @Query("SELECT * FROM roomtarjeta where numero = :numero AND usuario = :usuario")
+    fun buscarTarjeta(numero: String, usuario: String): List<RoomTarjeta>
 
     @Insert
     fun agregarTarjeta(vararg tarjeta: RoomTarjeta)

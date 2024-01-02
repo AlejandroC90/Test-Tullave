@@ -1,7 +1,9 @@
 package com.holman.test.testtullave.interfaces
 
 import android.content.Context
-
+/**
+ * Interfaz usada para las clases que permiten la ejecucion del registro de usuario
+ */
 interface InterfazRegistroUsuario {
 
     interface Vista {
